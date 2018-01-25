@@ -22,7 +22,7 @@ RSpec.describe Product, type: :model do
     it 'Title is shorter than description' do
       product = Product.new(title: 'so short', description: 'long', price: 12)
       product.validate
-      expect(product.errors.messages).to include(title: ["Title must be shorter than description"])
+      expect(product.errors.messages).to include(title: ['Title must be shorter than description'])
     end
   end
 

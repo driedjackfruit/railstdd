@@ -1,0 +1,8 @@
+h1 Edit product
+
+= semantic_form_for @product do |p|
+  = p.input :title
+  = p.input :description
+  = p.input :price, min: 0.01
+  = p.input :category
+  = p.action :submit
