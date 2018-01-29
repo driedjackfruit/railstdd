@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
+  before_action :get_product_by_id, only: [:show, :edit, :update, :destroy]
   #before_action :authenticate_admin!
 
   :user_signed_in?
@@ -19,29 +20,29 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-  def edit
-    @product = Product.find(params[:id])
+  def edit    
   end
 
-  def update
-    @product = Product.find(params[:id])
+  def update    
     return redirect_to products_path, notice: 'success' if @product.update(product_params)
     flash.now[:notice] = 'Wrong input.'
     render :edit
   end
 
-  def show
-    @product = Product.find(params[:id])
+  def show    
   end
 
-  def destroy
-    @product = Product.find(params[:id])
+  def destroy    
     flash[:notice] = 'Delete fail.'
     flash[:notice] = 'Success' if @product.destroy
     return redirect_to products_path
   end
 
   private
+  def get_product_by_id
+    @product = Product.find(params[:id])
+  end
+
   def product_params
     params.require(:product).permit(:title, :description, :price, :category_id)
   end
