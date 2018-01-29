@@ -1,4 +1,9 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
+  #before_action :authenticate_admin!
+
+  :user_signed_in?
+  :current_user
   def index
     @products = Product.all
   end

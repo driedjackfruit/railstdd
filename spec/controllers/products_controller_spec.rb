@@ -46,7 +46,7 @@ RSpec.describe ProductsController, type: :controller do
 
       it 'redirect to index' do
         do_request
-        expect(response).to redirect_to products_path
+        expect(response).to redirect_to products_path #product_path(assigns(:product))
       end
     end
 
