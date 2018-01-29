@@ -2,7 +2,10 @@ require 'rails_helper'
 
 
 describe 'User cans CRUD products', type: :feature do
+  let!(:user) { create(:user) }
+
   it 'can create a product' do
+    login_as(user, :scope => :user)
     visit products_path
     expect(page).to have_link 'Create a product'
     click_on 'Create a product'
@@ -16,6 +19,7 @@ describe 'User cans CRUD products', type: :feature do
 
   let!(:product) { create(:product) }
   it 'show a product' do
+    login_as(user, :scope => :user)
     visit '/products'
     expect(page).to have_content 'Title'
     click_on product.title
@@ -24,6 +28,7 @@ describe 'User cans CRUD products', type: :feature do
 
   context 'Update with valid params' do
     it 'update a product and return to index view' do
+      login_as(user, :scope => :user)
       visit '/products'
       expect(page).to have_content 'Edit'
       #click_link product.id
@@ -39,6 +44,7 @@ describe 'User cans CRUD products', type: :feature do
 
   context 'Update with invalid params' do
     it 'cant update' do
+      login_as(user, :scope => :user)
       visit '/products'
       expect(page).to have_content 'Edit'
       click_on 'Edit'
@@ -50,6 +56,7 @@ describe 'User cans CRUD products', type: :feature do
   end
 
   it 'delete a product' do
+    login_as(user, :scope => :user)
     visit '/products'
     expect(page).to have_content 'Delete'
     click_on 'Delete'
